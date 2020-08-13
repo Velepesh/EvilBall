@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f542057b12bcec4fa29f409c273e2dd, type: 3}
+  m_Name: Magnum
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 8452857484281275799, guid: 659f60bd2037350449123a5dfc773ce5, type: 3}
+  _icon: {fileID: 21300000, guid: d2084b8ece52fe646bd3afca8d8fac42, type: 3}
+  _gunData:
+    Label: Magnum
+    Price: 80
+    IsBuyed: 0
