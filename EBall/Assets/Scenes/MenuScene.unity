@@ -393,8 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347154c9e5e55ee46b0dedb57f4d0128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInventory: {fileID: 11400000, guid: 3206b16ee17202d469d27332420832b3, type: 2}
-  _walletData: {fileID: 11400000, guid: 4d04b959bbafa85419c2b4d2032e8f70, type: 2}
+  _walletData:
+    WalletBalance: 0
 --- !u!114 &79813091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +412,11 @@ MonoBehaviour:
   _toggle: {fileID: 1924970901}
   _musicSlider: {fileID: 1485816003}
   _effectsSlider: {fileID: 2053036437}
-  _settingsData: {fileID: 11400000, guid: 251022827be3dba479f7de5a237b364f, type: 2}
+  _settingsData:
+    ResolutionIndex: -2147483648
+    MusicVolume: 0
+    EffectsVolume: 0
+    IsFullscreen: 1
 --- !u!1 &82842307
 GameObject:
   m_ObjectHideFlags: 0
@@ -4457,6 +4461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e071f8994825181428d097d214dbe171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _backgroundMusicData:
+    IsExist: 0
 --- !u!82 &2067802277
 AudioSource:
   m_ObjectHideFlags: 0

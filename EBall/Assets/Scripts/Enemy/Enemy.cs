@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Money _money;
     [SerializeField] private Weapon _currentWeapon;
     [SerializeField] private AIDestinationSetter _aIDestinationSetter;
-   
+
     private Player _target;
     private SpriteRenderer _sprite;
     private Collider2D _collider2D;
@@ -22,9 +22,13 @@ public class Enemy : MonoBehaviour
     private float _timeBetweenAttacks;
     private AudioSource _audioSource;
     private Animator _animator;
+    private bool _isPlayerVisible = false;
+    private bool _isShootingDistance = false;
 
     public Player Target => _target;
     public Money Money => _money;
+    public bool IsPlayerVisible => _isPlayerVisible;
+    public bool IsShootingDistance => _isShootingDistance;
 
     public event UnityAction<float, float> HealthChanged;
     public event UnityAction<Enemy> Dying;
@@ -66,46 +70,14 @@ public class Enemy : MonoBehaviour
         _currentWeapon.transform.localScale = localScale;
     }
 
-    private bool IsShootingDistance()
-    {
-        bool isShootingDistance = false;
-
-        Vector3 diff = _target.transform.position - transform.position;
-        float curDistance = diff.sqrMagnitude;
-
-        if (curDistance <= _shootingDistance)
-        {
-            isShootingDistance = true;
-        }
-
-        return isShootingDistance;
-    }
-
-    private bool IsPlayerVisible()
-    {
-        bool isPlayerVisible = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, _target.transform.position - transform.position, _shootingDistance, _layerMask);
-
-        if (hit.collider != null)
-        {
-            if (hit.collider.gameObject.TryGetComponent(out Player player) || hit.collider.gameObject.TryGetComponent(out Shield shield))
-            {
-                isPlayerVisible = true;
-            }
-            else
-            {
-                isPlayerVisible = false;
-            }
-        }
-
-        return isPlayerVisible;
-    }
-
-    public virtual void Attack()
+    private void Attack()
     {
         if (_timeBetweenAttacks <= 0f)
         {
-            if (IsShootingDistance() && IsPlayerVisible())
+            CheckAttackDirection();
+            СheckDistanceToPlayer();
+
+            if (IsShootingDistance && IsPlayerVisible)
             {
                 _currentWeapon.Attack();
                 _timeBetweenAttacks = _currentWeapon.TimeBetweenAttacks;
@@ -114,6 +86,33 @@ public class Enemy : MonoBehaviour
         else
         {
             _timeBetweenAttacks -= Time.deltaTime;
+        }
+    }
+
+    private void CheckAttackDirection()
+    {
+        _isPlayerVisible = false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _target.transform.position - transform.position, _shootingDistance, _layerMask);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject.TryGetComponent(out Player player) || hit.collider.gameObject.TryGetComponent(out Shield shield))
+            {
+                _isPlayerVisible = true;
+            }
+        }
+    }
+
+    private void СheckDistanceToPlayer()
+    {
+        _isShootingDistance = false;
+
+        Vector3 diff = _target.transform.position - transform.position;
+        float curDistance = diff.sqrMagnitude;
+
+        if (curDistance <= _shootingDistance)
+        {
+            _isShootingDistance = true;
         }
     }
 
@@ -133,7 +132,7 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-             Dying?.Invoke(this);
+            Dying?.Invoke(this);
             StartCoroutine(EnemyDying(_audioSource.clip.length));
         }
     }

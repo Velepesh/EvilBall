@@ -13,9 +13,10 @@ namespace Pathfinding {
 	/// </summary>
 	[UniqueComponent(tag = "ai.destination")]
 	[HelpURL("http://arongranberg.com/astar/docs/class_pathfinding_1_1_a_i_destination_setter.php")]
+	[RequireComponent(typeof(IAstarAI))]
 	public class AIDestinationSetter : VersionedMonoBehaviour {
 		/// <summary>The object that the AI should move to</summary>
-		public Transform Target;
+		[HideInInspector] public Transform Target;
 		private IAstarAI _ai;
 
 		private void OnEnable () {

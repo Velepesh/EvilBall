@@ -812,7 +812,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: bb5d3d114ad1aa618be9e70d180964dc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BackgroundMusic
@@ -1222,4 +1222,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MenuScene.unity
   - Assets/Scenes/GameScene.unity
-  playerPath: D:/UnityProjects/EBall/Builds/EBall.exe
+  playerPath: D:/UnityProjects/EvilBall/EBall/Builds/EBall.exe
